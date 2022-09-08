@@ -31,22 +31,24 @@ def learn(words):
     calc_prob(d)
     return d
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--input-dir', dest="path", default=None)
-    parser.add_argument('--model', dest="pickle", default="model.pickle")
-    args = parser.parse_args()
-
-    if (args.path == None):
+def main_train(args):
+    if (args.input_dir == None):
         line = input()
         tok = line.split()
     else:
-        tok = tokenize_file(args.path)
+        tok = tokenize_file(args.input_dir)
     cleared_data = clear_data(tok)
     d = learn(cleared_data)
 
-    with open(args.pickle, 'wb') as f:
+    with open(args.model, 'wb') as f:
         pickle.dump(d, f)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input-dir', dest="input_dir", default=None)
+    parser.add_argument('--model', dest="model", default="model.pickle")
+    args = parser.parse_args()
+    main_train(args)
 
 
 

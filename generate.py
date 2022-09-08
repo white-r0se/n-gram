@@ -21,13 +21,8 @@ def generation(line, d, n):
             break
     print(" ".join(line))
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--model', dest="model", required=True)
-    parser.add_argument('--prefix', dest="prefix", nargs="+", default=None)
-    parser.add_argument('--length', dest="length", type=int, default=10)
-    args = parser.parse_args()
 
+def main_generate(args):
     with open(args.model, 'rb') as f:
         d = pickle.load(f)
 
@@ -45,6 +40,14 @@ if __name__ == "__main__":
         prefix.append(np.random.choice(next_words))
 
     generation(prefix, d, args.length)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model', dest="model", required=True)
+    parser.add_argument('--prefix', dest="prefix", nargs="+", default=None)
+    parser.add_argument('--length', dest="length", type=int, default=10)
+    args = parser.parse_args()
+    main_generate(args)
 
 
 
