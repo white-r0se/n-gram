@@ -20,5 +20,5 @@ class Model():
         
 if __name__ == "__main__":
     model = Model()
-    model.fit("test.txt", "model.pickle")
+    model.fit("data//test.txt", "model.pickle")
     model.generate(["saw", "her"], 10)
